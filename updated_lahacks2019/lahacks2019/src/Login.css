@@ -1,0 +1,18 @@
+/* main grid layout */
+.containerLogin {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+
+}
+
+.top {
+    align-items: stretch;
+
+}
+.bottom {
+    align-self: center;
+
+}
