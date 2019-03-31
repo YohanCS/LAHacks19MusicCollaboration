@@ -5,6 +5,7 @@
     height: 100%;
     width: 100%;
     position: fixed;
+<<<<<<< HEAD
     /* define a 3x4 grid */
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 10% 1fr;
@@ -13,6 +14,16 @@
 }
 /* justify-self is for colums and align-self is for
 /* children of the grid 3x4
+=======
+    /* define a 3x4 grid */ 
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 10% 1fr; 
+    grid-row-gap: 20px;
+    grid-column-gap: 20px; 
+}
+/* justify-self is for colums and align-self is for 
+/* children of the grid 3x4 
+>>>>>>> b15c1afd19cb7ad570a41825a9a7b43fc82843c9
     . l l .
     . l l .
     . l l .
@@ -20,7 +31,11 @@
 .logo {
     display: flex;
     grid-column: 1/5;
+<<<<<<< HEAD
     grid-row: 1/4;
+=======
+    grid-row: 1/4; 
+>>>>>>> b15c1afd19cb7ad570a41825a9a7b43fc82843c9
     align-content:center;
     justify-content: center;
 
@@ -42,6 +57,7 @@
     justify-content: center;
 }
 
+<<<<<<< HEAD
 .registerButton {
     display: flex;
     grid-column: 3/4;
@@ -49,3 +65,13 @@
     align-self :center;
     justify-content: center;
 }
+=======
+.registerButton {  
+    display: flex;
+    grid-column: 3/4;
+    grid-row: 5/6;
+    align-self :center; 
+    justify-content: center;
+}
+
+>>>>>>> b15c1afd19cb7ad570a41825a9a7b43fc82843c9
