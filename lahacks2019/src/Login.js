@@ -3,8 +3,20 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-import axios from 'axios';
-import { firebase, lahacks } from './components/Firebase/firebase'
+import Homepage from "./homepage";
+import './Login.css';
+
+
+import { firebase } from './components/Firebase/firebase'
+import {
+  Route,
+  BrowserRouter
+} from "react-router-dom";
+
+import {
+    Link
+  } from "react-router-dom";
+import Button from '@material-ui/core/Button';
 
 class Login extends Component {
   constructor(props){
@@ -26,7 +38,14 @@ class Login extends Component {
              onChange = {(event,newValue) => this.setState({password:newValue})}
              />
            <br/>
-           <RaisedButton label="Submit" primary={true} style={style} onClick={(event) => this.handleClick(event)}/>
+           <div className="submitButton">
+               <Link to="/homepage">
+
+                   <Button className="button" primary={true} style={style} size="large" variant='contained' color='primary' onClick={(event) => this.handleClick(event,this.props.role)}>
+                       Submit
+                   </Button>
+               </Link>
+           </div>
        </div>
        </MuiThemeProvider>
     )
@@ -38,34 +57,7 @@ class Login extends Component {
       loginRole:'student'
     }
   }
-  componentWillMount(){
-  // console.log("willmount prop values",this.props);
-  if(this.props.role !== undefined){
-      console.log("in User componentWillMount");
-      var localloginComponent=[];
-      localloginComponent.push(
-        <MuiThemeProvider>
-          <div>
-           <TextField
-             hintText="Enter your User No"
-             floatingLabelText="User Id"
-             onChange = {(event,newValue) => this.setState({username:newValue})}
-             />
-           <br/>
-             <TextField
-               type="password"
-               hintText="Enter your Password"
-               floatingLabelText="Password"
-               onChange = {(event,newValue) => this.setState({password:newValue})}
-               />
-             <br/>
-             <RaisedButton label="Submit" primary={true} style={style} onClick={(event) => this.handleClick(event)}/>
-         </div>
-         </MuiThemeProvider>
-      )
-      this.setState({menuValue:1,loginComponent:localloginComponent,loginRole:'student'})
-  }
-  }
+
   handleClick(event){
     var payload={
       "userid":this.state.username,
@@ -76,12 +68,25 @@ class Login extends Component {
     firebase.auth().signInWithEmailAndPassword(payload.userid,payload.password)
     .then(function(response) {
       console.log("User Authentication successfully done .. !");
+      return (
+    <BrowserRouter>
+        <Route exact path="/homepage" component={Homepage} />
+    </BrowserRouter>
+  );
 
     })
     .catch(function(error) {
       var errorCode = error.code;
       var errorMessage = error.message;
-      console.log("create user failed : ",errorCode,errorMessage);
+      alert("Please enter valid credentials")
+        console.log("create user failed : ",errorCode,errorMessage);
+      return (
+    <BrowserRouter>
+        <Route exact path="/" component={Login} />
+    </BrowserRouter>
+  );
+
+
       });
 
   }
@@ -106,7 +111,15 @@ class Login extends Component {
                onChange = {(event,newValue) => this.setState({password:newValue})}
                />
              <br/>
-             <RaisedButton label="Submit" primary={true} style={style} onClick={(event) => this.handleClick(event)}/>
+         </div>
+
+         <div className="submitButton">
+             <Link to="/homepage">
+
+                 <Button className="button" primary={true} style={style} size="large" variant='contained' color='primary' onClick={(event) => this.handleClick(event,this.props.role)}>
+                     Submit
+                 </Button>
+             </Link>
          </div>
          </MuiThemeProvider>
       )
@@ -115,19 +128,22 @@ class Login extends Component {
                    loginRole:loginRole})
   }
   render() {
-    return (
-      <div>
-        <MuiThemeProvider>
-        <AppBar
-             title="Login"
-           />
-        </MuiThemeProvider>
-        {this.state.loginComponent}
-      </div>
-    );
+      return (
+        <div className="containerLogin">
+          <div className="top">
+            <MuiThemeProvider>
+            <AppBar
+                title="Login"
+              />
+            </MuiThemeProvider>
+          </div>
+          <div className="bottom">
+            {this.state.loginComponent}
+          </div>
+        </div>
+      );
+    }
   }
-}
-
 const style = {
   margin: 15,
 };

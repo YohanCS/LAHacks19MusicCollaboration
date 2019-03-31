@@ -23,9 +23,11 @@ const settings = {
 firestore.settings(settings);
 
 const lahacks = firestore.collection('lahacks');
+const music = firestore.collection('musicians');
 
 export {
   firebase,
   firestore,
   lahacks,
+  music,
 };

@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-import LoginScreen from './Loginscreen';
+import Login from './Login';
+import Register from './Register';
+import {
+  Route,
+  BrowserRouter
+} from "react-router-dom";
+import Home from "./Home.js";
 
 class App extends Component {
   constructor(props){
@@ -10,19 +16,14 @@ class App extends Component {
       uploadScreen:[]
     }
   }
-  componentWillMount(){
-    var loginPage =[];
-    loginPage.push(<LoginScreen appContext={this}/>);
-    this.setState({
-                  loginPage:loginPage
-                    })
-  }
+
   render() {
     return (
-      <div className="App">
-        {this.state.loginPage}
-        {this.state.uploadScreen}
-      </div>
+      <BrowserRouter>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/Register" component={Register} />
+      </BrowserRouter>
     );
   }
 }
